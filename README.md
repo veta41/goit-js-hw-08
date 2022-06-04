@@ -2,7 +2,7 @@
 
 Проект собран с помощью parcel-project-template.
 
-used libraries: 
+Used libraries: 
 
 lodash.throttle
 
