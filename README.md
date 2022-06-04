@@ -4,6 +4,8 @@
 
 Used libraries: 
 
-lodash.throttle
+lodash.throttle,
 
-SimpleLightbox
+SimpleLightbox,
+
+Vimeo Player
