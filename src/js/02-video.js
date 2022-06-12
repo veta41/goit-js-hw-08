@@ -7,9 +7,6 @@ const VIDEOPLAYER_KEY = "videoplayer-current-time";
  const iframe = document.querySelector('#vimeo-player');
      const player = new Vimeo.Player(iframe);
 
-     const playerStart = parseFloat(localStorage.getItem(VIDEOPLAYER_KEY))
-
-     player.setCurrentTime(playerStart);
 
 
  player.on('timeupdate', throttle(setPlayerTimer, 1000));
@@ -19,6 +16,22 @@ const VIDEOPLAYER_KEY = "videoplayer-current-time";
  function setPlayerTimer({seconds}) {
   localStorage.setItem(VIDEOPLAYER_KEY, seconds);
 }
+
+const playerStart = localStorage.getItem(VIDEOPLAYER_KEY)
+player.setCurrentTime(playerStart)
+.then(function (seconds) {
+ console.log(seconds); 
+}).catch(function(error) {
+  switch (error.name) {
+      case 'RangeError':
+          
+          break;
+
+      default:
+         
+          break;
+  }
+});
 
 
 
