@@ -8,30 +8,10 @@ const refs = {
  message:  document.querySelector('[name="message"]'),
 
 }
-
-  refs.form.addEventListener('submit', onFormSumbit);
   refs.form.addEventListener('input', throttle(onInputWtiteLocalStorage, 500));
-
-const users = {
-  email: '',
-  message: '',
-
-}
-saveMessageLocalStorage()
-
-function onInputWtiteLocalStorage(e) {
-  if (e.target === refs.email) {
-    users.email = e.target.value;
-  }
+  refs.form.addEventListener('submit', onFormSumbit);
   
-  if (e.target === refs.message) {
-    users.message = e.target.value;
-  }
-
-   localStorage.setItem(STORAGE_KEY, 
-    JSON.stringify(users));
-}
-
+ 
 function onFormSumbit(e) {
   e.preventDefault();
 
@@ -48,27 +28,42 @@ function onFormSumbit(e) {
    
    } else {
      
-       users.email = email.value;
-       users.message = message.value;
-       
+    saveMessage.email = email.value;
+    saveMessage.message = message.value;
+    console.log(saveMessage);
   
    }
 
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 
-  console.log(users);
+}
+
+
+function onInputWtiteLocalStorage(e) {
+  
+  saveMessage[e.target.name] = e.target.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(saveMessage));
+}
+
+
+   let saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+ 
+
+if(saveMessage === null){
+  saveMessage = {
+    email: '',
+    message: '',
+  };
+}
    
-}
+saveMessageLocalStorage(saveMessage);
 
-function saveMessageLocalStorage() {
-  const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY
-  ));
+    function saveMessageLocalStorage(e) {
+     refs.email.value = e.email;
+     refs.message.value = e.message;
+     
+   }
 
-  if(saveMessage){
-
-    refs.email.value = saveMessage.email;
-    refs.message.value = saveMessage.message;
-    console.log(saveMessage);
-  }
-}
+   
+  
