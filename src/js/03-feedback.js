@@ -23,7 +23,7 @@ function onInputWtiteLocalStorage(e) {
   if (e.target === refs.email) {
     users.email = e.target.value;
   }
-
+  
   if (e.target === refs.message) {
     users.message = e.target.value;
   }
